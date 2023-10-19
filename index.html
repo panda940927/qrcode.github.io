@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <!-- 引入QR碼生成的JavaScript庫 -->
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    <style>
+        h1 {
+            text-align: center;
+            color: white;
+            background-color: black;
+            padding: 10px;
+        }
+        button {
+            width: 200px; /* 設置寬度 */
+            height: 30px; /* 設置高度 */
+            margin: 5px 0; /* 添加外邊距 */
+        }
+        .container {
+            text-align: center; /* 居中對齊 */
+        }
+
+        #text-input {
+            margin-right: 10px; /* 設置輸入框的右邊距 */
+        }
+    </style>
+</head>
+<body>
+    <h1>QR Code Generator</h1>
+    <div class="container">
+        <input  type="text" id="text-input" placeholder="輸入文字">
+        <button onclick="generateQRCode()">生成QR碼</button>
+    </div>
+    <h2>提示：可按右鍵另存圖片保存</h2>
+
+    <div id="qrcode"></div>
+
+    <script>
+        function generateQRCode() {
+            var text = document.getElementById('text-input').value;
+            var qrcodeElement = document.getElementById("qrcode");
+            
+            // 清空之前的 QR Code
+            qrcodeElement.innerHTML = "";
+            
+            // 生成新的 QR Code
+            var qrcode = new QRCode(qrcodeElement, {
+                text: text,
+                width: 480,
+                height: 480
+            });
+        }
+
+        function checkEnter(event) {
+            if (event.key === "Enter") {
+                generateQRCode();
+                event.preventDefault(); // 防止 Enter 鍵的預設行為
+            }
+        }
+    </script>
+</body>
+</html>
